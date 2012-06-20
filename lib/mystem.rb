@@ -7,7 +7,8 @@ module Mystem
     end
 
     def lemma(text)
-      return self.run(text, 'l')
+      result = self.run(text, 'l')
+      return result[1...-1]
     end
 
     def run(text, mode)
@@ -15,7 +16,7 @@ module Mystem
       File.open(in_file, 'w') {|f| f.puts(text) }
 
       out_file = DIR + 'out'
-      cmd = @exec + ' -n' + mode + ' ' + in_file + ' ' + out_file + ' -e utf-8'
+      cmd = @exec + ' -' + mode + ' ' + in_file + ' ' + out_file + ' -e utf-8'
 
       system(cmd)
 
@@ -36,10 +37,8 @@ module Mystem
 
   end
 
-  def self.test
+  def self.lemma(text)
     mystem = Application.new
-    puts mystem.lemma('автомашины')
+    return mystem.lemma(text)
   end
 end
-
-Mystem.test
