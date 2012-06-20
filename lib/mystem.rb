@@ -13,16 +13,17 @@ module Mystem
 
     def run(text, mode)
       in_file = DIR + 'in'
-      File.open(in_file, 'w') {|f| f.puts(text) }
+      File.open(in_file, 'w') { |f| f.puts(text) }
 
       out_file = DIR + 'out'
       cmd = @exec + ' -' + mode + ' ' + in_file + ' ' + out_file + ' -e utf-8'
 
       system(cmd)
 
-      result = File.open(out_file, 'r') {|f| f.gets }
+      result = File.open(out_file, 'r') { |f| f.gets }
       return result
     end
+
     protected :run
 
     def application
@@ -33,6 +34,7 @@ module Mystem
         return 'mystem.exe'
       end
     end
+
     protected :application
 
   end
