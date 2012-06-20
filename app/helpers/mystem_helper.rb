@@ -1,0 +1,2 @@
+module MystemHelper
+end
