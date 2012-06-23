@@ -8,7 +8,12 @@ module Mystem
 
     def lemma(text)
       result = self.run(text, 'l')
-      return result[1...-1]
+
+      if (result != nil)
+        return result[1...-1]
+      else
+        return text
+      end
     end
 
     def run(text, mode)
