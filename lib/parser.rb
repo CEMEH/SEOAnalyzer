@@ -22,14 +22,14 @@ module Parser
     end
 
     def words(doc)
+
+      doc.xpath("//*").children.each do |node|
+        node << ' '
+      end
+
       doc.xpath("//script").remove
       doc.xpath("//style").remove
       doc.xpath("//title").remove
-
-      #todo: добавить пробел к концу каждого тэга
-      doc.search('br').each { |br| br << ' ' }
-      doc.search('h1').each { |br| br << ' ' }
-      doc.search('div').each { |br| br << ' ' }
 
       text = doc.text.gsub(/\s+/, " ").strip
       return text.split(' ')
@@ -37,4 +37,3 @@ module Parser
   end
 
 end
-
