@@ -1,5 +1,6 @@
 SEOAnalyzer::Application.routes.draw do
   get "mystem/index"
+  post "mystem/index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,1 +1,7 @@
-<%= @test %>
+<h1>SEO-анализатор HTML-кода</h1>
+<%= form_tag({:controller => "mystem", :action => "index"}, :method => "post") do %>
+    <%= label_tag(:code, "HTML-code:") %><br/>
+    <%= text_area_tag(:code, nil, :size => "100x20") %>
+    <p/>
+    <%= submit_tag("Анализировать") %>
+<% end %>

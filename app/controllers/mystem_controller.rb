@@ -1,16 +1,11 @@
-require 'Mystem'
+require 'Seo'
+require 'Parser'
 
 class MystemController < ApplicationController
   def index
-
-    require 'nokogiri'
-    require 'open-uri'
-
-# Get a Nokogiri::HTML:Document for the page we’re interested in...
-
-    doc = Nokogiri::HTML(open('http://catalog-shopping.ru'))
-    doc.xpath("//script").remove
-    doc.xpath("//style").remove
-    @test = doc.text
+    if params[:code].present?
+      words = Parser::parse_html(params[:code])
+      @result = Seo::Page.new(words)
+    end
   end
 end
