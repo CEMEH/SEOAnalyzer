@@ -25,7 +25,7 @@ module Parser
 
       doc.xpath("//*").children.each do |node|
         begin
-           node << ' '
+          node << ' '
         rescue => e
           #todo: убрать этот костыль
         end
@@ -38,7 +38,10 @@ module Parser
       text = doc.text.gsub(/\s+/, " ").strip
       words = text.split(' ')
 
-      words.delete_if {|word| word.size <= 2 }
+      words.delete_if do |word|
+        word.strip!
+        word.size <= 2
+      end
 
       return words
     end
