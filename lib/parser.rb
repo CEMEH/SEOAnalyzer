@@ -36,7 +36,11 @@ module Parser
       doc.xpath("//title").remove
 
       text = doc.text.gsub(/\s+/, " ").strip
-      return text.split(' ')
+      words = text.split(' ')
+
+      words.delete_if {|word| word.size <= 2 }
+
+      return words
     end
   end
 

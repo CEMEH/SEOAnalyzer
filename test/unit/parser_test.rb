@@ -16,4 +16,11 @@ class ParserTest < Test::Unit::TestCase
     expected = Array['Header', 'text']
     assert_equal expected, result
   end
+
+  def test_parser_with_short_words
+    html = "<h1>Header</h1>text a by the"
+    result = Parser::parse_html(html)
+    expected = Array['Header', 'text', 'the',]
+    assert_equal expected, result
+  end
 end
