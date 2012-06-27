@@ -26,7 +26,7 @@ class SeoWordTest < Test::Unit::TestCase
   end
 
   def test_word_name
-    assert_equal @testWord, @wordAuto.word
+    assert_equal @testWord, @wordAuto.to_s
   end
 
   def test_word_count

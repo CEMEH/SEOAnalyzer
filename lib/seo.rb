@@ -30,7 +30,7 @@ module Seo
       @count = 0
     end
 
-    def word
+    def to_s
       @word
     end
 

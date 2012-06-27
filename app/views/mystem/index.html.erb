@@ -1,7 +1,32 @@
 <h1>SEO-анализатор HTML-кода</h1>
 <%= form_tag({:controller => "mystem", :action => "index"}, :method => "post") do %>
     <%= label_tag(:code, "HTML-code:") %><br/>
-    <%= text_area_tag(:code, nil, :size => "100x20") %>
+    <%= text_area_tag(:code, @code, :size => "100x20") %>
     <p/>
     <%= submit_tag("Анализировать") %>
+<% end %>
+
+<% if @result.present? %>
+    <h2>Результат</h2>
+    <table>
+      <thead>
+      <tr>
+        <th>Слово</th>
+        <th>Средняя позиция</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @result.words.each do |word| %>
+          <tr>
+            <td>
+              <%= word[0].to_s %>
+            </td>
+            <td>
+              <%= word.count %>
+            </td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+
 <% end %>
