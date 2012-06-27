@@ -13,16 +13,23 @@
       <tr>
         <th>Слово</th>
         <th>Средняя позиция</th>
+        <th>Вхождения</th>
       </tr>
       </thead>
       <tbody>
-      <% @result.words.each do |word| %>
+      <% @result.words.each do |words| %>
+          <% word = words[1] %>
           <tr>
             <td>
-              <%= word[0].to_s %>
+              <%= word %>
             </td>
             <td>
-              <%= word.count %>
+              <%= word.avg_pos %>
+            </td>
+            <td>
+              <% word.words.each do |entry_word| %>
+                  <%= entry_word[1] %>:<%= entry_word[0] %><br/>
+              <% end %>
             </td>
           </tr>
       <% end %>

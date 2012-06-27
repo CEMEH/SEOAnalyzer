@@ -38,6 +38,10 @@ module Seo
       @count
     end
 
+    def words
+      @words
+    end
+
     def add(word, position)
       @count = @count + 1
       @words[position] = word
