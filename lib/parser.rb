@@ -24,7 +24,11 @@ module Parser
     def words(doc)
 
       doc.xpath("//*").children.each do |node|
-        node << ' '
+        begin
+           node << ' '
+        rescue => e
+          #todo: убрать этот костыль
+        end
       end
 
       doc.xpath("//script").remove
