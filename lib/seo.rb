@@ -66,7 +66,6 @@ module Seo
     end
 
     def weight
-      puts @page.count_words
       result = (self.count.to_f / @page.count_words.to_f) * 100.0
       return result
     end
