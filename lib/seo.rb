@@ -4,6 +4,7 @@ module Seo
   class Page
     def initialize(words)
       @words = Hash.new
+      @count_words = words.size
       words.each_with_index { |word, position| self::add_word((position.to_i+1), word) }
     end
 
@@ -11,11 +12,15 @@ module Seo
       @words
     end
 
+    def count_words
+      @count_words
+    end
+
     def add_word(position, word)
       lemma = Mystem.lemma(word)
 
       if !@words.key?(lemma)
-        @words[lemma] = Word.new(lemma)
+        @words[lemma] = Word.new(lemma, self)
       end
 
       @words[lemma].add(word, position)
@@ -24,10 +29,15 @@ module Seo
 
   class Word
 
-    def initialize(word)
+    def initialize(word, page)
       @word = word
       @words = Hash.new
-      @count = 0
+
+      if page.instance_of? Page
+        @page = page
+      else
+        raise TypeError, "Argument page is not instance of Page"
+      end
     end
 
     def to_s
@@ -35,7 +45,7 @@ module Seo
     end
 
     def count
-      @count
+      return @words.size
     end
 
     def words
@@ -43,7 +53,6 @@ module Seo
     end
 
     def add(word, position)
-      @count = @count + 1
       @words[position] = word
     end
 
@@ -56,7 +65,12 @@ module Seo
       return avg_pos
     end
 
-  end
+    def weight
+      puts @page.count_words
+      result = (self.count.to_f / @page.count_words.to_f) * 100.0
+      return result
+    end
 
+  end
 
 end

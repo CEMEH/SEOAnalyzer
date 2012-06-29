@@ -3,7 +3,7 @@ require 'lib/Seo'
 
 class SeoWordTest < Test::Unit::TestCase
 
-  attr_accessor :page, :testWord
+  attr_accessor :page, :testWord, :cntWords
 
   def setup
     words = Array[
@@ -18,6 +18,7 @@ class SeoWordTest < Test::Unit::TestCase
 
     @page = Seo::Page.new(words)
     @testWord = 'автомашина'
+    @cntWords = words.size
     @wordAuto = page.words[testWord]
   end
 
@@ -33,8 +34,16 @@ class SeoWordTest < Test::Unit::TestCase
     assert_equal 3, @wordAuto.count
   end
 
+  def test_word_weight
+    assert_in_delta 42.857, @wordAuto.weight, 0.001
+  end
+
   def test_words_unq
     assert_equal 4, @page.words.size
+  end
+
+  def test_count_words
+     assert_equal @cntWords, @page.count_words
   end
 
   def test_list_words

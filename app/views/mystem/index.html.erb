@@ -12,6 +12,7 @@
       <thead>
       <tr>
         <th>Слово</th>
+        <th>Вес</th>
         <th>Средняя позиция</th>
         <th>Вхождения</th>
       </tr>
@@ -22,6 +23,9 @@
           <tr>
             <td>
               <%= word %>
+            </td>
+            <td>
+              <%= word.weight %>%
             </td>
             <td>
               <%= word.avg_pos %>
