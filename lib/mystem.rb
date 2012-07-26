@@ -8,24 +8,29 @@ module Mystem
 
     def lemma(text)
       result = self.run(text, 'l')
-
-      if (result != nil)
-        return result[1...-1]
-      else
-        return text
-      end
+      return result
     end
 
     def run(text, mode)
       in_file = DIR + 'in'
-      File.open(in_file, 'w') { |f| f.puts(text) }
+      File.open(in_file, 'w') { |f|
+        text.each { |word| f.puts(word) }
+      }
 
       out_file = DIR + 'out'
-      cmd = @exec + ' -' + mode + ' ' + in_file + ' ' + out_file + ' -e utf-8'
+      cmd = @exec + ' -c' + mode + ' ' + in_file + ' ' + out_file + ' -e utf-8'
 
       system(cmd)
 
-      result = File.open(out_file, 'r') { |f| f.gets }
+      result = Array.new
+
+      # однострочный и много строчный режим (в зависимости от входных параметров)
+      File.open(out_file, "r") do |infile|
+        while (line = infile.gets)
+          result.push(line)
+        end
+      end
+
       return result
     end
 
