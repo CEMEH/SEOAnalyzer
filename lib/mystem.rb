@@ -12,9 +12,13 @@ module Mystem
     end
 
     def run(text, mode)
+      keys = Array.new
       in_file = DIR + 'in'
       File.open(in_file, 'w') { |f|
-        text.each { |word| f.puts(word) }
+        text.each { |word|
+          keys.push(word)
+          f.puts(word)
+        }
       }
 
       out_file = DIR + 'out'
@@ -22,16 +26,15 @@ module Mystem
 
       system(cmd)
 
-      result = Array.new
-
-      # однострочный и много строчный режим (в зависимости от входных параметров)
+      values = Array.new
+      #@todo: однострочный и много строчный режим (в зависимости от входных параметров)
       File.open(out_file, "r") do |infile|
         while (line = infile.gets)
-          result.push(line)
+          values.push(line[0..-2])
         end
       end
 
-      return result
+      return Hash[*keys.zip(values).flatten]
     end
 
     protected :run
