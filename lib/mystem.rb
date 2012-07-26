@@ -35,9 +35,20 @@ module Mystem
       require 'rbconfig'
       os = RbConfig::CONFIG['target_os']
       cpu = RbConfig::CONFIG['target_cpu']
+      
+      result = ''
       if os == 'mingw32'
-        return 'mystem.exe'
+        result = 'mystem.exe'
       end
+      if os == 'linux'
+        result = 'mystem_linux'
+        if cpu == 'i686'
+          result += '32'
+        else
+          result += '64'
+        end
+      end
+      return result
     end
 
     protected :application
