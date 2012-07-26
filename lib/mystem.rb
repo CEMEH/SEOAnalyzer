@@ -30,7 +30,7 @@ module Mystem
       #@todo: однострочный и много строчный режим (в зависимости от входных параметров)
       File.open(out_file, "r") do |infile|
         while (line = infile.gets)
-          values.push(line[0..-2])
+          values.push(line[0..-2].gsub("{", "").gsub("}", ""))
         end
       end
 

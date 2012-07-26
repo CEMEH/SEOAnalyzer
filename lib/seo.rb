@@ -1,8 +1,9 @@
-require 'lib/Mystem'
+require 'Mystem'
 
 module Seo
   class Page
     def initialize(words)
+      @wordLemms = Mystem.lemma(words)
       @words = Hash.new
       @count_words = words.size
       words.each_with_index { |word, position| self::add_word((position.to_i+1), word) }
@@ -17,7 +18,7 @@ module Seo
     end
 
     def add_word(position, word)
-      lemma = Mystem.lemma(word)
+      lemma = @wordLemms[word]
 
       if !@words.key?(lemma)
         @words[lemma] = Word.new(lemma, self)
@@ -73,3 +74,4 @@ module Seo
   end
 
 end
+
