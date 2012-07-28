@@ -1,4 +1,4 @@
-require 'Mystem'
+require 'lib/Mystem'
 
 module Seo
   class Page
