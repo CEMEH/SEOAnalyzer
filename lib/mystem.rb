@@ -56,6 +56,9 @@ module Mystem
           result += '64'
         end
       end
+      if os == 'darwin10.0'
+        result = 'mystem_macos'
+      end
       return result
     end
 
