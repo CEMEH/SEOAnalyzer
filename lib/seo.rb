@@ -3,6 +3,7 @@ require 'lib/Mystem'
 module Seo
 
   WEIGHT_MARK = 0.01
+  POSITION_MARK = 0.01
 
   class Page
     def initialize(words)
@@ -62,8 +63,7 @@ module Seo
     end
 
     def mark
-      #@todo: расчет оценки слова (факторы: вес слова, средняя позиция)
-      0
+      self.mark_weight + self.mark_pos
     end
 
     def avg_pos
@@ -75,13 +75,19 @@ module Seo
       return avg_pos
     end
 
+    def mark_pos
+      avg_pos = self.avg_pos
+
+      1 - avg_pos * Seo::POSITION_MARK
+    end
+
     def weight
       result = (self.count.to_f / @page.count_words.to_f) * 100.0
       return result
     end
 
     def mark_weight
-      weight = self::weight
+      weight = self.weight
 
       # cчитаем что после вес больше WEIGHT_SPAM идет на во вред
       if weight >= WEIGHT_SPAM
