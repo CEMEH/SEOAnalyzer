@@ -57,6 +57,11 @@ module Seo
       @words[position] = word
     end
 
+    def mark
+      #@todo: расчет оценки слова (факторы: вес слова, средняя позиция)
+      0
+    end
+
     def avg_pos
       sum_pos = 0
       @words.each_key { |position|
