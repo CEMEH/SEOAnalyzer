@@ -38,6 +38,10 @@ class SeoWordTest < Test::Unit::TestCase
     assert_in_delta 42.857, @wordAuto.weight, 0.001
   end
 
+  def test_word_mark_weight
+    assert_in_delta -0.428, @wordAuto.mark_weight, 0.001
+  end
+
   def test_words_unq
     assert_equal 4, @page.words.size
   end

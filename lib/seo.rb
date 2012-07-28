@@ -1,6 +1,9 @@
 require 'lib/Mystem'
 
 module Seo
+
+  WEIGHT_MARK = 0.01
+
   class Page
     def initialize(words)
       @wordLemms = Mystem.lemma(words)
@@ -29,6 +32,7 @@ module Seo
   end
 
   class Word
+    WEIGHT_SPAM = 7
 
     def initialize(word, page)
       @word = word
@@ -74,6 +78,19 @@ module Seo
     def weight
       result = (self.count.to_f / @page.count_words.to_f) * 100.0
       return result
+    end
+
+    def mark_weight
+      weight = self::weight
+
+      # cчитаем что после вес больше WEIGHT_SPAM идет на во вред
+      if weight >= WEIGHT_SPAM
+        mark = -1 * (weight * Seo::WEIGHT_MARK)
+      else
+        mark = weight * Seo::WEIGHT_MARK
+      end
+
+      mark
     end
 
   end
