@@ -1,4 +1,6 @@
 SEOAnalyzer::Application.routes.draw do
+
+  root :to => "mystem#index"
   get "mystem/index"
   post "mystem/index"
 
