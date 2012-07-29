@@ -10,6 +10,7 @@
       <thead>
       <tr>
         <th>Слово</th>
+        <th>Оценка</th>
         <th>Вес</th>
         <th>Средняя&nbsp;позиция</th>
         <th>Вхождения</th>
@@ -21,6 +22,9 @@
           <tr>
             <td>
               <%= word %>
+            </td>
+            <td>
+              <%= word.mark %> (<%= word.mark_pos %> + <%= word.mark_weight %>)
             </td>
             <td>
               <%= raw word_weight(word) %>

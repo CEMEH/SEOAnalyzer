@@ -2,8 +2,7 @@ require 'lib/Mystem'
 
 module Seo
 
-  WEIGHT_MARK = 0.01
-  POSITION_MARK = 0.01
+  WEIGHT_MARK = 0.2
 
   class Page
     def initialize(words)
@@ -63,7 +62,7 @@ module Seo
     end
 
     def mark
-      self.mark_weight + self.mark_pos
+      (self.mark_weight + self.mark_pos) * 100
     end
 
     def avg_pos
@@ -76,9 +75,11 @@ module Seo
     end
 
     def mark_pos
+      max_pos = @page.count_words
       avg_pos = self.avg_pos
 
-      1 - avg_pos * Seo::POSITION_MARK
+      # чем дальше средняя позиция слова от начала страницы, тем хуже
+      0.1 + (-0.1 * (avg_pos.to_f / max_pos.to_f))
     end
 
     def weight
@@ -89,7 +90,7 @@ module Seo
     def mark_weight
       weight = self.weight
 
-      # cчитаем что после вес больше WEIGHT_SPAM идет на во вред
+      # cчитаем что после вес больше WEIGHT_SPAM идет во вред
       if weight >= WEIGHT_SPAM
         mark = -1 * (weight * Seo::WEIGHT_MARK)
       else
