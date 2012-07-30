@@ -35,7 +35,8 @@ module Parser
       doc.xpath("//style").remove
       doc.xpath("//title").remove
 
-      text = doc.text.gsub(/\s+/, " ").strip
+      # @todo: тоже костыли
+      text = doc.text.gsub(/\s+/, " ").gsub(",", " ").gsub(".", " ").gsub("«", " ").gsub("»", " ").strip
       words = text.split(' ')
 
       words.delete_if do |word|
