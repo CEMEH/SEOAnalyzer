@@ -1,5 +1,3 @@
-require 'Seo'
-require 'Parser'
 
 class MystemController < ApplicationController
   def index

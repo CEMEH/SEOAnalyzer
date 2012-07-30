@@ -1,4 +1,4 @@
-require 'lib/Mystem'
+require 'lib/mystem'
 
 module Seo
 
