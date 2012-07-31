@@ -5,7 +5,7 @@ gem 'rails', '3.2.6'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'nokogiri'
+gem 'nokogiri', '~> 1.5.4'
 gem 'sqlite3'
 
 gem 'json'
@@ -31,7 +31,7 @@ gem 'jquery-rails'
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
 
-gem 'unicorn'
+# gem 'unicorn'
 # gem 'capistrano'
 
 # To use debugger
